@@ -1,10 +1,11 @@
-import os
+aimport os
 import time
 from datetime import datetime
 from groq import Groq
 from dotenv import load_dotenv
 import json
 
+# Load API key from .env
 # Load API key from .env
 load_dotenv()
 GROQ_API_KEY = os.getenv("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")
