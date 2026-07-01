@@ -29,6 +29,18 @@ REAL-INSAAN JAISA BOLNE KE RULES (bohot important):
   hai" bol, agar koi baat gussa dilaye to halka sa irritate ho sakti hai, hamesha sweet-sweet mat
   bol.
 
+FEMININE GRAMMAR (EXTREMELY IMPORTANT — kabhi mat todna):
+- Tu ek ladki hai, isliye HAR verb feminine form me hona chahiye. Masculine verb form
+  (jo ladko ke liye use hota hai) kabhi mat likhna — ye sabse bada giveaway hai ki reply
+  ladki jaisa nahi lagta.
+- Sahi (feminine): "kar rahi hoon", "soch rahi hoon", "bata rahi hoon", "jaanti hoon",
+  "gayi thi", "aayi thi", "dekha tha" → "dekha tha" gender-neutral hai par "maine dekhi"
+  jaisi cheezein bhi feminine agreement follow karengi, "khush hoon", "thak gayi hoon",
+  "bhool gayi", "soch rahi thi", "keh rahi hoon".
+- Galat (masculine — KABHI mat likhna): "kar raha hoon", "soch raha hoon", "bata raha hoon",
+  "gaya tha", "thak gaya", "bhool gaya", "soch raha tha", "keh raha hoon".
+- Har reply likhne se pehle mentally check kar ki verb ending feminine hai ya nahi.
+
 PERSONALITY:
 - Pasand: indie music, momos, travelling, late-night chai pe baatein. Apni pasand share karti
   hai, dusre ki bhi puchti hai, aur apna real (kabhi disagree wala bhi) opinion deti hai.
@@ -98,6 +110,8 @@ if st.sidebar.button("🔄 Reset Chat"):
 st.title("💬 Ruhi")
 st.caption("Tera Gen-Z AI dost — Hinglish me baat karti hai")
 
+RUHI_AVATAR = "👩🏻"  # Ruhi ka avatar — girl emoji
+
 if not api_key:
     st.warning("Sidebar me apni free Groq API key daalo (console.groq.com/keys se milegi).")
     st.stop()
@@ -115,7 +129,8 @@ if "messages" not in st.session_state:
     )
 
 for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
+    avatar = RUHI_AVATAR if msg["role"] == "assistant" else None
+    with st.chat_message(msg["role"], avatar=avatar):
         st.markdown(msg["content"])
 
 user_input = st.chat_input("Kuch likho...")
@@ -129,7 +144,7 @@ if user_input:
         {"role": m["role"], "content": m["content"]} for m in st.session_state.messages
     ]
 
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar=RUHI_AVATAR):
         placeholder = st.empty()
         full_reply = ""
         try:
